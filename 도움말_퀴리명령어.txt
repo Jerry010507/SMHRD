@@ -1,0 +1,66 @@
+DELETE FROM tb_employee WHERE emp_id = '25030600NaN';
+DELETE FROM tb_employee WHERE emp_id = '250306008';
+
+DELETE FROM 테이블명 WHERE 조건;
+DELETE FROM employees WHERE emp_name = '테스트맨';
+
+CREATE TABLE td_chating (
+  chat_id INT AUTO_INCREMENT PRIMARY KEY,
+  chat_name TEXT NOT NULL,
+  chat_message TEXT NOT NULL,
+  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+
+CREATE TABLE tb_group (
+    group_id VARCHAR(20) NOT NULL PRIMARY KEY,  -- 그룹 ID, 고유값
+    group_name VARCHAR(100) NOT NULL,           -- 그룹 이름
+    group_head VARCHAR(20),                     -- 그룹장 ID
+    group_desc VARCHAR(50),                     -- 그룹 설명
+    group_pos VARCHAR(50) NOT NULL,             -- 조직의 위치
+    group_count INT,                            -- 그룹의 인원 수
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP -- 생성 시간
+);
+
+INSERT INTO `cgi_24K_AI4_p2_3`.`tb_group` (`group_id`, `group_name`, `group_head`, `group_desc`, `group_pos`, `group_count`, `created_at`) 
+VALUES 
+('B1001', '팬더팀', '김예은', '백엔드', '4라인', 2, NOW()),
+('F1001', '너구리팀', '안지운', '프론트엔드', '4라인', 2, NOW()),
+('P1001', '꾀꼬리팀', '김민정', '기획', '5라인', 2, NOW());
+
+
+CREATE TABLE tb_work (
+  work_id VARCHAR(20) PRIMARY KEY,  -- VARCHAR로 설정
+  work_name VARCHAR(255) NOT NULL,
+  work_salary_type ENUM('월급', '시급') NOT NULL, -- 월급, 시급
+  work_days VARCHAR(50) NOT NULL,  -- 월,화,수,목,금,토
+  work_default_rule INT NOT NULL,  -- 소정근로규칙 (예: 40 시간)
+  work_max_rule INT NOT NULL,      -- 최대 근로규칙 (예: 52 시간)
+  work_type ENUM('정규직', '계약직', '인턴') NOT NULL, -- 직급
+  work_desc TEXT, -- 비고란, 널 값 허용
+  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+
+
+
+
+CREATE TABLE enum_values (
+    id INT AUTO_INCREMENT PRIMARY KEY,  -- 고유 아이디
+    category VARCHAR(50) NOT NULL,      -- 카테고리 (예: 'salary_type', 'work_type')
+    value VARCHAR(50) NOT NULL          -- 실제 값 (예: '월급', '시급', '정규직', '계약직', '인턴')
+);
+
+
+-- work_salary_type에 대한 값들 삽입
+INSERT INTO enum_values (category, value) VALUES 
+('work_salary_type', '월급'),
+('work_salary_type', '시급');
+
+-- work_type에 대한 값들 삽입
+INSERT INTO enum_values (category, value) VALUES 
+('work_type', '정규직'),
+('work_type', '계약직'),
+('work_type', '인턴');
+
+

@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import api from '../api';
 import styles from '../MainPage.module.css'; // CSS 모듈 import
+import cafeLogo from '../assets/logo_cafe.png'; // ✅ 로고 이미지 import
 
 const MainPage = () => {
     // 로그인 상태 변수
@@ -51,14 +52,14 @@ const MainPage = () => {
     return (
         <div className={styles.pageContainer} style={{
             display: 'flex',
-            justifyContent: 'center', // 가로 중앙 정렬
-            alignItems: 'center',     // 세로 중앙 정렬
-            height: '100vh'           // 전체 화면 높이
+            justifyContent: 'center',
+            alignItems: 'center',
+            height: '100vh'
         }}>
             <div style={{ textAlign: 'center', minWidth: '360px' }}>
-                {/* ✅ 서비스 로고/타이틀 */}
-                <div className={styles.container}>
-                    <span className={styles.our}>SAVANNAH</span>
+                {/* ✅ 기존 SAVANNAH 텍스트 대신 이미지 로고 사용 */}
+                <div style={{ marginBottom: '20px' }}>
+                    <img src={cafeLogo} alt="로고" style={{ width: '350px', height: 'auto' }} />
                 </div>
 
                 {/* ✅ 로그인 폼 */}
@@ -80,21 +81,27 @@ const MainPage = () => {
                         required
                     />
                     <br />
-                    <button className={styles.btnLogin} type="submit">로그인</button>
+                    <button
+                        className={styles.btnLogin}
+                        type="submit"
+                        style={{ backgroundColor: '#86593d', color: '#fff' }} // ✅ 로그인 버튼만 색상 유지
+                    >
+                        로그인
+                    </button>
                 </form>
 
                 {/* ✅ 서브 버튼들 */}
                 <div style={{ display: "flex", justifyContent: "center", gap: "10px", marginTop: "20px" }}>
                     <button
                         className={styles.RUFirst}
-                        style={{ width: "180px", padding: "10px 20px" }}
+                        style={{ width: "180px", padding: "10px 20px" }} // ✅ 기존 색상
                         onClick={() => setShowModal(true)}
                     >
                         처음이신가요?
                     </button>
                     <button
                         className={styles.RUFirst}
-                        style={{ width: "180px", padding: "10px 20px" }}
+                        style={{ width: "180px", padding: "10px 20px" }} // ✅ 기존 색상
                         onClick={editerLogin}
                     >
                         접속skip(개발자용)

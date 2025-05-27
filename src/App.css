@@ -1,108 +1,111 @@
 #menuBarWrapper {
-    display: flex;
-    justify-content: center;
-    flex-wrap: wrap;
-    background-color: #f2f2f2;
-    padding: 10px;
-    gap: 10px;
-  }
-  
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  background-color: #f2f2f2;
+  padding: 10px;
+  gap: 10px;
+}
+
+.funcButton,
+.funcButton_auth {
+  width: 120px;
+  height: 40px;
+  font-size: 0.9rem;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  color: white; /* 텍스트 색상 고정 */
+}
+
+/* ✅ 일반 버튼: 우드톤 */
+.funcButton {
+  background-color: #86593d;
+}
+.funcButton:hover {
+  background-color: #6d432f;
+}
+
+/* ✅ 관리자 버튼: 딥그린 */
+.funcButton_auth {
+  background-color: #006400;
+}
+.funcButton_auth:hover {
+  background-color: #004d00;
+}
+
+#changableView {
+  border: 1px solid black;
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  padding: 10px;
+  overflow-x: auto;
+  box-sizing: border-box;
+  width: 100%;
+  flex-grow: 1;
+}
+
+#welcome {
+  width: 100%;
+  text-align: end;
+  font-size: 1.2rem;
+}
+
+#profile {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  padding: 10px;
+}
+
+#logo {
+  display: block;
+  margin-left: 25px;
+  font-size: 30px;
+  font-weight: bold;
+  background-image: linear-gradient(to right, #3b79ff, #92caff);
+  -webkit-background-clip: text;
+  color: transparent;
+}
+
+#account {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  width: 100%;
+  flex-grow: 1;
+}
+
+/* ✅ 모바일 대응 */
+@media (max-width: 600px) {
   .funcButton,
   .funcButton_auth {
-    width: 120px;
-    height: 40px;
-    font-size: 0.9rem;
-    border: none;
-    border-radius: 6px;
-    cursor: pointer;
+    width: 100px;
+    height: 36px;
+    font-size: 0.8rem;
   }
-  
-  .funcButton {
-    background-color: rgb(255, 201, 255);
-  }
-  .funcButton_auth {
-    background-color: rgb(90, 147, 255);
-  }
-  .funcButton:hover {
-    background-color: rgb(255, 138, 255);
-  }
-  .funcButton_auth:hover {
-    background-color: rgb(14, 98, 255);
-  }
-  
-  #changableView {
-    border: 1px solid black;
-    display: flex;
-    justify-content: center;
-    gap: 10px;
-    padding: 10px;
-    overflow-x: auto;
-    box-sizing: border-box;
-    width: 100%;
-    flex-grow: 1;
-  }
-  
+
   #welcome {
-    width: 100%;
-    text-align: end;
-    font-size: 1.2rem;
+    font-size: 1rem;
+    text-align: center;
   }
-  
+
+  #logo {
+    font-size: 24px;
+    margin-left: 0;
+    text-align: center;
+    width: 100%;
+  }
+
   #profile {
-    display: flex;
+    flex-direction: column;
     align-items: center;
-    flex-wrap: wrap;
+  }
+
+  #changableView {
+    flex-direction: column;
+    width: 100%;
     padding: 10px;
   }
-  
-  #logo {
-    display: block;
-    margin-left: 25px;
-    font-size: 30px;
-    font-weight: bold;
-    background-image: linear-gradient(to right, #3b79ff, #92caff);
-    -webkit-background-clip: text;
-    color: transparent;
-  }
-  
-  #account {
-    display: flex;
-    align-items: center;
-    justify-content: flex-end;
-    width: 100%;
-    flex-grow: 1;
-  }
-  
-  /* 모바일 대응 */
-  @media (max-width: 600px) {
-    .funcButton,
-    .funcButton_auth {
-      width: 100px;
-      height: 36px;
-      font-size: 0.8rem;
-    }
-  
-    #welcome {
-      font-size: 1rem;
-      text-align: center;
-    }
-  
-    #logo {
-      font-size: 24px;
-      margin-left: 0;
-      text-align: center;
-      width: 100%;
-    }
-  
-    #profile {
-      flex-direction: column;
-      align-items: center;
-    }
-  
-    #changableView {
-      flex-direction: column;
-      width: 100%;
-      padding: 10px;
-    }
-  }
-  
+}

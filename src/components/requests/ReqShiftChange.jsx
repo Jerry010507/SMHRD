@@ -8,18 +8,21 @@ const ReqShiftChange = () => {
   const [changedate, setChangedate] = useState("");
   const [changetime, setChangetime] = useState("");
   const [reason, setReason] = useState("");
-  const [isSubmitted, setIsSubmitted] = useState(false);
 
   useEffect(() => {
-    const aa = JSON.parse(sessionStorage.getItem("user"));
-    const storedEmployeeData = JSON.parse(sessionStorage.getItem("employeeData"));
-    const hrEmployees = storedEmployeeData.filter(emp => emp.emp_name === aa.name);
-    setEmpId(hrEmployees[0].emp_id);
+    try {
+      const aa = JSON.parse(sessionStorage.getItem("user"));
+      const storedEmployeeData = JSON.parse(sessionStorage.getItem("employeeData"));
+      const hrEmployees = storedEmployeeData.filter(emp => emp.emp_name === aa.name);
+      if (hrEmployees.length > 0) setEmpId(hrEmployees[0].emp_id);
+    } catch (e) {
+      console.warn("세션 불러오기 실패:", e);
+    }
   }, []);
 
   const handleSubmit = async () => {
     if (!origindate || !origintime || !changedate || !changetime || !reason) {
-      alert("모든 항목을 입력해 주세요!");
+      alert("모든 항목을 입력하세요");
       return;
     }
 
@@ -35,51 +38,38 @@ const ReqShiftChange = () => {
         change_time: changetime,
       });
 
-      alert(`근무 변경 신청 완료!`);
-
+      alert("✅ 근무 변경 신청 완료!");
       setOrigindate("");
       setOrigintime("");
       setChangedate("");
       setChangetime("");
       setReason("");
-      setIsSubmitted(true);
-    } catch (error) {
-      console.error("❌ 요청 실패:", error);
-      alert("근무 변경 요청 실패! 다시 시도해 주세요.");
+    } catch (err) {
+      console.error("❌ 요청 실패:", err);
+      alert("근무 변경 요청 실패");
     }
   };
 
   return (
     <div style={styles.container}>
-      <h3 style={styles.title}>근무 변경 요청</h3>
-
-      <div style={styles.formGroup}>
+      <h3>근무 변경 요청</h3>
+      <div style={styles.group}>
         <label>기존 근무 날짜</label>
-        <input
-          type="date"
-          value={origindate}
-          onChange={(e) => setOrigindate(e.target.value)}
-          style={styles.input}
-        />
+        <input type="date" value={origindate} onChange={e => setOrigindate(e.target.value)} style={styles.input} />
 
-        <label>기존 근무 시간</label>
-        <select value={origintime} onChange={(e) => setOrigintime(e.target.value)} style={styles.select}>
+        <label>기존 시간</label>
+        <select value={origintime} onChange={e => setOrigintime(e.target.value)} style={styles.input}>
           <option value="">선택</option>
           <option>오픈</option>
           <option>미들</option>
           <option>마감</option>
         </select>
 
-        <label>변경할 근무 날짜</label>
-        <input
-          type="date"
-          value={changedate}
-          onChange={(e) => setChangedate(e.target.value)}
-          style={styles.input}
-        />
+        <label>변경할 날짜</label>
+        <input type="date" value={changedate} onChange={e => setChangedate(e.target.value)} style={styles.input} />
 
-        <label>변경할 근무 시간</label>
-        <select value={changetime} onChange={(e) => setChangetime(e.target.value)} style={styles.select}>
+        <label>변경할 시간</label>
+        <select value={changetime} onChange={e => setChangetime(e.target.value)} style={styles.input}>
           <option value="">선택</option>
           <option>오픈</option>
           <option>미들</option>
@@ -87,16 +77,9 @@ const ReqShiftChange = () => {
         </select>
 
         <label>사유</label>
-        <input
-          type="text"
-          value={reason}
-          onChange={(e) => setReason(e.target.value)}
-          style={styles.input}
-        />
+        <input type="text" value={reason} onChange={e => setReason(e.target.value)} style={styles.input} />
 
-        <button style={styles.button} onClick={handleSubmit}>
-          신청하기
-        </button>
+        <button onClick={handleSubmit} style={styles.button}>신청하기</button>
       </div>
     </div>
   );
@@ -109,37 +92,27 @@ const styles = {
     padding: "20px",
     border: "1px solid #ccc",
     borderRadius: "10px",
-    boxShadow: "0px 4px 6px rgba(0, 0, 0, 0.1)",
-    backgroundColor: "#fff",
+    backgroundColor: "#fff"
   },
-  title: {
-    textAlign: "center",
-    marginBottom: "15px",
-  },
-  formGroup: {
+  group: {
     display: "flex",
     flexDirection: "column",
-    gap: "10px",
+    gap: "10px"
   },
   input: {
     padding: "8px",
-    border: "1px solid #ccc",
     borderRadius: "5px",
-  },
-  select: {
-    padding: "8px",
-    border: "1px solid #ccc",
-    borderRadius: "5px",
+    border: "1px solid #ccc"
   },
   button: {
-    marginTop: "15px",
-    padding: "10px",
-    backgroundColor: "#007BFF",
-    color: "white",
+    marginTop: "10px",
+    background: "#007BFF",
+    color: "#fff",
     border: "none",
     borderRadius: "5px",
-    cursor: "pointer",
-  },
+    padding: "10px",
+    cursor: "pointer"
+  }
 };
 
 export default ReqShiftChange;

@@ -24,6 +24,8 @@ const styles = {
   title: {
     textAlign: "center",
     marginBottom: "15px",
+    fontSize: "18px",
+    fontWeight: "bold"
   },
   box: {
     minHeight: "200px",

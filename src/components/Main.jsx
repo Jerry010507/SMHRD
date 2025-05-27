@@ -6,7 +6,7 @@ import Management from './management/Management';
 import Schedule2 from './Schedule2';
 import RequestForm from './requests/RequestForm';
 import MenuList from './MenuList';
-import logoImage from '../savannah.png';
+import logoImage from '../assets/logo_cafe.png'; // ✅ 새 로고 이미지
 import '../App.css';
 
 const Main = () => {
@@ -81,18 +81,17 @@ const Main = () => {
           alignItems: "center",
           justifyContent: "space-between"
         }}>
+          {/* ✅ 텍스트 대신 로고만 출력 */}
           <div style={{ display: "flex", alignItems: "center" }}>
             <img
               src={logoImage}
               alt="logo"
               style={{
-                width: "28px",
-                height: "28px",
+                width: "160px", // ✅ 메인 상단용으로 크게 출력
+                height: "auto",
                 objectFit: "contain",
-                marginRight: "10px"
               }}
             />
-            <span id='logo' style={{ fontSize: "20px", fontWeight: "bold" }}>Schedule</span>
           </div>
           <div id="account">
             <h3 id='welcome' style={{ fontSize: "16px", marginBottom: "4px" }}>

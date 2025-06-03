@@ -1,6 +1,7 @@
 // 📌 휴가 요청 + 근무변경 요청 시 승인 여부를 관리자가 변경 가능하고,
 // 자동 스케줄 생성 시 '승인된 요청'을 기반으로 휴무 반영되도록 보완
 
+// requestRouter.js (수정본)
 const express = require('express');
 const requestRouter = express.Router();
 const conn = require("../config/db");
@@ -58,7 +59,7 @@ requestRouter.post("/list/getlist", (request, response) => {
 
     const sql = `
         SELECT 
-            req_type, req_status, req_content,
+            req_idx, req_type, req_status, req_content,
             start_date, end_date,
             origin_date, origin_time, change_date, change_time
         FROM tb_request
@@ -75,7 +76,7 @@ requestRouter.post("/list/getlist", (request, response) => {
     });
 });
 
-// ✅ [4] 관리자 승인 처리 (예: 승인 또는 반려)
+// ✅ [4] 관리자 승인 처리
 requestRouter.post("/approve", (req, res) => {
     const { req_idx, decision, admin_id } = req.body;
     const req_status = decision === "승인" ? "Y" : "R";

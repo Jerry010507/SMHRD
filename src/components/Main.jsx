@@ -1,4 +1,3 @@
-// ✅ Main.jsx (수정 완료)
 import React, { useEffect, useState } from 'react';
 import Calendar from './Calendar';
 import Chatting from './Chatting';
@@ -57,39 +56,35 @@ const Main = () => {
       flexDirection: 'column',
       alignItems: 'center',
       justifyContent: 'flex-start',
-      width: '100%',
+      width: '100vw',
       minHeight: '100vh',
       backgroundColor: '#f9f9f9',
-      overflowX: 'hidden',
-      padding: '10px'
+      padding: '20px',
+      boxSizing: 'border-box',
+      overflowX: 'hidden'
     }}>
       <div style={{
         width: '100%',
         maxWidth: '480px',
-        backgroundColor: '#fff',
-        boxSizing: 'border-box',
-        padding: '10px',
+        backgroundColor: 'transparent',
+        padding: '0px',
+        border: 'none',
         position: 'relative'
       }}>
-        <div id='profile' style={{
+        {/* ✅ 로고 + 환영문구 */}
+        <div style={{
           display: 'flex',
-          alignItems: 'flex-start',
           justifyContent: 'space-between',
+          alignItems: 'center',
           marginBottom: '10px'
         }}>
           <img src={logoImage} alt='logo' style={{ width: '100px', height: 'auto' }} />
-          <div style={{ textAlign: 'right', fontSize: '13px' }}>
-            <div>환영합니다. {account.name}님!({account.role})</div>
+          <div style={{ fontSize: '13px', textAlign: 'right' }}>
+            환영합니다. {account.name}님!({account.role})
           </div>
         </div>
 
-        {/* ✅ 메인화면으로 링크를 우측 하단에 배치 */}
-        <div style={{ position: 'absolute', bottom: '8px', right: '12px', fontSize: '12px' }}>
-          <a href='/' style={{ color: '#007bff', textDecoration: 'none' }}>메인화면으로</a>
-        </div>
-
-        <hr style={{ margin: '10px 0' }} />
-
+        {/* ✅ 메뉴 리스트 */}
         <MenuList
           menuItems={[
             { label: '메인' },
@@ -103,9 +98,15 @@ const Main = () => {
           onItemSelect={handleMenuSelect}
         />
 
+        {/* ✅ 동적으로 변경되는 콘텐츠 */}
         <div id='changableView' style={{ marginTop: '20px' }}>
           {textValue}
         </div>
+      </div>
+
+      {/* ✅ 하단 메인화면 링크 */}
+      <div style={{ marginTop: '30px', fontSize: '13px' }}>
+        <a href='/' style={{ color: '#007bff', textDecoration: 'none' }}>메인화면으로</a>
       </div>
     </div>
   );

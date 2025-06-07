@@ -1,11 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import Calendar from './Calendar';
-import Chatting from './Chatting';
-import Attendance from './attendance/Attendance';
-import Management from './management/Management';
 import Schedule2 from './Schedule2';
 import RequestForm from './requests/RequestForm';
-import MenuList from './MenuList';
+import Management from './management/Management';
 import logoImage from '../assets/logo_cafe.png';
 import '../App.css';
 
@@ -25,16 +22,11 @@ const Main = () => {
     }
   }, []);
 
-  const handleMenuSelect = (item) => {
-    switch (item.label) {
+  // ✅ 버튼 클릭 시 페이지 변경 함수
+  const handleClick = (label) => {
+    switch (label) {
       case '메인':
         setTextValue(<Calendar />);
-        break;
-      case '채팅':
-        setTextValue(<Chatting />);
-        break;
-      case '근태':
-        setTextValue(<Attendance />);
         break;
       case '요청하기':
         setTextValue(<RequestForm />);
@@ -84,19 +76,22 @@ const Main = () => {
           </div>
         </div>
 
-        {/* ✅ 메뉴 리스트 */}
-        <MenuList
-          menuItems={[
-            { label: '메인' },
-            { label: '채팅' },
-            { label: '근태' },
-            { label: '요청하기' },
-            ...(account.role === '관리자'
-              ? [{ label: '스케줄 생성' }, { label: '관리하기' }]
-              : [])
-          ]}
-          onItemSelect={handleMenuSelect}
-        />
+        {/* ✅ 2줄 2개 버튼 */}
+        <div style={{
+          display: 'grid',
+          gridTemplateColumns: '1fr 1fr',
+          gap: '10px',
+          marginBottom: '20px'
+        }}>
+          <button className="btn brown" onClick={() => handleClick('메인')}>메인</button>
+          <button className="btn brown" onClick={() => handleClick('요청하기')}>요청하기</button>
+          {account.role === '관리자' && (
+            <>
+              <button className="btn green" onClick={() => handleClick('스케줄 생성')}>스케줄 생성</button>
+              <button className="btn green" onClick={() => handleClick('관리하기')}>관리하기</button>
+            </>
+          )}
+        </div>
 
         {/* ✅ 동적으로 변경되는 콘텐츠 */}
         <div id='changableView' style={{ marginTop: '20px' }}>

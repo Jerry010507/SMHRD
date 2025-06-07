@@ -27,7 +27,7 @@ const ReqComplete = () => {
 
         const fetchVacationData = async () => {
             try {
-                const response = await axios.post('/request/list/getlist', { ids: empId });
+                const response = await axios.post('/request/list/getlist', { ids: [empId] }); // ✅ 배열로 변경
                 console.log("📦 요청 내역 응답:", response.data);
                 setRequests(response.data.data);
             } catch (error) {

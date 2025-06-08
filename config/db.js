@@ -1,33 +1,27 @@
-// db에 연결정보를 관히라고 실제 연결을 담당하는 파일
+// db.js 또는 conn.js
+//  MySQL 연결 풀 설정 파일
 
-const mysql = require("mysql2");
-
-// DB연결정보 넣어주기
-const conn = mysql.createConnection({
-    host: "project-db-cgi.smhrd.com",
-    port: 3307,
-    user: "cgi_24K_AI4_p2_3",
-    password: "smhrd3",
-    database: "cgi_24K_AI4_p2_3"
+const mysql = require("mysql2/promise");  // async/await 지원을 위해 promise 버전 사용
+//  DB 연결 풀 생성
+const db = mysql.createPool({
+  host: "127.0.0.1",          // 로컬 MySQL
+  port: 3306,                 // 기본 포트
+  user: "root",               // 사용자명 (설정한 계정으로 변경 가능)
+  password: "12345", // 비밀번호 입력
+  database: "cafe_schedule", // 사용할 DB 이름
+  waitForConnections: true,  // 커넥션 대기 허용
+  connectionLimit: 10,       // 최대 10개의 연결 유지
+  queueLimit: 0              // 대기열 제한 없음
 });
 
-// DB연결 실행하기
-conn.connect((err) => {
-    if (err) {
-        console.error("DB연결 실패: ", err);
-        return;
-    }
-    console.log("DB연결 성공");
-});
+//  연결 테스트용 코드
+(async () => {
+  try {
+    const [rows] = await db.query("SELECT 1");
+    console.log("✅ DB 연결 성공");
+  } catch (err) {
+    console.error("❌ DB 연결 실패:", err.message);
+  }
+})();
 
-setInterval(() => {
-    conn.ping((err) => {
-      if (err) {
-        console.error('연결 오류:', err);
-      } else {
-        console.log('MySQL 서버와의 연결 유지');
-      }
-    });
-  }, 1000 * 60 * 5); // 5분마다 ping 쿼리 보내기
-
-module.exports = conn;
+module.exports = db;

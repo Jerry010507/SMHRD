@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 
 const weekdays = ["일", "월", "화", "수", "목", "금", "토"];
 const roles = ["오픈", "미들", "마감"];
@@ -6,6 +7,7 @@ const roles = ["오픈", "미들", "마감"];
 const Schedule2 = () => {
   const [schedule, setSchedule] = useState([]);
   const [employees, setEmployees] = useState([]);
+  const navigate = useNavigate();
 
   useEffect(() => {
     setEmployees([
@@ -83,7 +85,11 @@ const Schedule2 = () => {
   return (
     <div>
       <h2>🟢 스타벅스식 순환 스케줄</h2>
-      <button onClick={generateSchedule}>스케줄 생성</button>
+       <div style={{ display: "flex", gap: "10px", marginBottom: "15px" }}>
+        <button onClick={generateSchedule}>스케줄 생성</button>
+        <button onClick={() => navigate("/manualschedule")}>스케줄 수동 수정</button>
+      </div>
+      
       {schedule.length > 0 && (
         <table border="1" cellPadding="5" style={{ marginTop: "20px", width: "100%" }}>
           <thead>

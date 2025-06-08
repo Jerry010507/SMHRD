@@ -34,6 +34,8 @@ app.use('/autoSchedule', autoScheduleRouter); // ✅ API 등록!
 const scheduleManagerRouter = require('./routes/scheduleManager.js'); 
 app.use('/schedule-manager', scheduleManagerRouter);  // ✅ 새로운 라우터 추가
 
+const customScheduleRouter = require("./routes/customScheduleRouter");
+app.use("/customschedule", customScheduleRouter);
 
 // ---------------------- 서버 + 소켓.io ---------------------- //
 const server = app.listen(PORT, () => {
